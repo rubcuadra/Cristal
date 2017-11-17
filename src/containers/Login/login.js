@@ -30,6 +30,7 @@ class Login extends Component{
 	}
 
 	render(){
+	  const ep = window.location.hostname==="rubcuadra.github.io"?"/Cristal":""
 	  return (
 	  <div className="loginContainer align-vertical">
   	  	
@@ -38,7 +39,7 @@ class Login extends Component{
 	  		<p><span>CRISTAL</span></p>
 
 	  		<div>
-		  		<img className="fit" alt="Logo" src="/img/logo.png"/>
+		  		<img className="fit" alt="Logo" src={`${ep}/img/logo.png`}/>
 	  		</div>
 	  	</div>
 
