@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', serif; 
+  font-weight:lighter;
+  height: 100vh;
+}
+
+.align-vertical{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.align{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+#main, #root{
+	width: 100%;
+	height: 100%;
+}
+
+.fit{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.max{
+	width: 100%;
+	height: 100%;
+}
