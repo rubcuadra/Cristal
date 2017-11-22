@@ -33,7 +33,6 @@ class Login extends Component{
 	render(){
 	  const ep = window.location.hostname==="rubcuadra.github.io"?"/Cristal":"";
 	  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-	  console.log(isMobile);
 	  return (
 	  <div className="loginContainer align-vertical">
   	  	
