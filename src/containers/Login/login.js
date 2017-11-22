@@ -31,7 +31,9 @@ class Login extends Component{
 	}
 
 	render(){
-	  const ep = window.location.hostname==="rubcuadra.github.io"?"/Cristal":""
+	  const ep = window.location.hostname==="rubcuadra.github.io"?"/Cristal":"";
+	  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	  console.log(isMobile);
 	  return (
 	  <div className="loginContainer align-vertical">
   	  	
@@ -51,7 +53,7 @@ class Login extends Component{
 	  	<div className="loginBttns align-vertical">
 			<FacebookLogin
 	          appId="1940430472878281"
-	          autoLoad={false}
+	          autoLoad={isMobile}
 	          fields="name,email,picture"
 	          scope="email,public_profile,user_religion_politics"
 	          callback={this.responseFacebook.bind(this)}/>
