@@ -39,3 +39,21 @@
 @media screen and (max-width: 568px) {
     .aboutContainer{font-size: 0.65em;}
 }
+
+.emailFormContainer form label{
+	margin-bottom: 0px;
+	margin-top: 25px;
+}
+
+.emailFormContainer form button{
+	margin-top: 25px;
+}
+
+.emailFormContainer i{
+	position: absolute;
+	right:0;
+	margin: 15px;
+	color: black;
+}
+
+.fbutton{ margin-top: 15px; }

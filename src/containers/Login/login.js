@@ -3,15 +3,49 @@ import _ from "lodash";
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import FacebookLogin from 'react-facebook-login';
+import Modal from "../../components/modal";
 import "./login.css";
+
+class EmailForm extends Component{
+	
+	onSubmit(e){
+		e.preventDefault();
+		const {email,password} = this.refs;
+		//AQUI SE PODRIA HACER ALGO CON LA INFO
+		if (email.value&&password.value) this.props.onSubmit( {email:email.value,password:password.value} );
+	}
+
+	render(){
+		const {onClose} = this.props;
+		return (
+		  <Modal>
+		  	<div className="emailFormContainer max">
+		  		<a href="/" onClick={(e)=>{e.preventDefault(); onClose();}}><i className="material-icons">close</i></a>
+			  	
+			  	<form onSubmit={this.onSubmit.bind(this)} className="align-vertical max">
+				 	<h4>Login with email!</h4>
+			 		<label>Email</label><input ref="email" type="email"/>
+			 		<label>Password</label><input ref="password" type="password"/>
+					<button type="submit">Login</button>
+				</form>
+			</div>
+		  </Modal>
+		);
+	}
+}
 
 class Login extends Component{
 	
-	onLoginClick(){
-		const email=""; //Probab requiera un form...
-		const password="";
+	constructor(props){
+		super(props);
+		this.state = {showEmailForm:false};
+	}
+
+	onEmailLoginClick({email,password}){
+		console.log(email);
+		console.log(password);
 		// Daremos por hecho que se logeo bien
-		this.props.signinUser( {email,password,push:this.props.history.push} ); //Algun parametro
+		// this.props.signinUser( {email,password,push:this.props.history.push} ); //Algun parametro
 	}
 
 	responseFacebook(response){
@@ -31,15 +65,17 @@ class Login extends Component{
 	}
 
 	render(){
+	  const {showEmailForm} = this.state;
 	  const ep = window.location.hostname==="rubcuadra.github.io"?"/Cristal":"";
 	  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	  
 	  return (
 	  <div className="loginContainer align-vertical">
-  	  	
+  	  	{showEmailForm?<EmailForm onSubmit={this.onEmailLoginClick} onClose={()=>{this.setState({showEmailForm:false})}}/>:null}
   	  	<div className="titleContainer align-vertical">
 	  		<p>Bienvenido a</p>
 	  		<p><span>CRISTAL</span></p>
-
+			
 	  		<div>
 		  		<img className="fit" alt="Logo" src={`${ep}/img/logo.png`}/>
 	  		</div>
@@ -56,8 +92,7 @@ class Login extends Component{
 	          fields="name,email,picture"
 	          scope="email,public_profile,user_religion_politics"
 	          callback={this.responseFacebook.bind(this)}/>
-			
-            <button className="fbutton" onClick={this.onLoginClick.bind(this)}>Login with Email</button>
+            <button className="fbutton" onClick={()=>{this.setState({showEmailForm:!this.state.showEmailForm})}}>Login with Email</button>
 	  	</div>
 	  </div>);
 	}

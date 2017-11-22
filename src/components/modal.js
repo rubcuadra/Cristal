@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from '../index'
+import "./modal.css";
 
 export default class Modal extends Component{
 	componentDidMount(){
@@ -23,9 +24,7 @@ export default class Modal extends Component{
 	_render(){
 		ReactDOM.render(	
 			<Provider store={store}>
-				<div>
-					{this.props.children}
-				</div>
+				{this.props.children}
 			</Provider>, this.modalTarget);
 	}
 
