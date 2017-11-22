@@ -56,11 +56,12 @@ class Login extends Component{
 	          fields="name,email,picture"
 	          scope="email,public_profile,user_religion_politics"
 	          callback={this.responseFacebook.bind(this)}/>
+			
+            <button className="fbutton" onClick={this.onLoginClick.bind(this)}>Login with Email</button>
 	  	</div>
 	  </div>);
 	}
 }
-// <button className="fbutton" onClick={this.onLoginClick.bind(this)}>Login Normal</button>
 //React-Redux
 //Obtener estados -> props
 function mapStateToProps({auth}){	
