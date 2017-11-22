@@ -66,7 +66,7 @@ class PostsNew extends Component{
 			  <NavBar/>
 			  <form className="align max" onSubmit={handleSubmit(this.onSubmit)}>
 				<div className="personal align-vertical">
-					<div className="userInfo max">
+					<div className="userInfo max align-vertical">
 					  <div style={{background}} className="pp-name"/>
 					  <div style={{width:"100%"}} className="infoInput align">
 						  <label>Nombre</label>
