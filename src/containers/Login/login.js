@@ -12,7 +12,8 @@ class EmailForm extends Component{
 		e.preventDefault();
 		const {email,password} = this.refs;
 		//AQUI SE PODRIA HACER ALGO CON LA INFO
-		if (email.value&&password.value) this.props.onSubmit( {email:email.value,password:password.value} );
+		if (email.value&&password.value) 
+			this.props.onSubmit( {email:email.value,pwd:password.value} );
 	}
 
 	render(){
@@ -41,11 +42,8 @@ class Login extends Component{
 		this.state = {showEmailForm:false};
 	}
 
-	onEmailLoginClick({email,password}){
-		console.log(email);
-		console.log(password);
-		// Daremos por hecho que se logeo bien
-		// this.props.signinUser( {email,password,push:this.props.history.push} ); //Algun parametro
+	onEmailLoginClick({email,pwd}){
+		this.props.signinUser( {email,pwd,push:this.props.history.push} ); //Algun parametro
 	}
 
 	responseFacebook(response){
@@ -71,7 +69,7 @@ class Login extends Component{
 	  
 	  return (
 	  <div className="loginContainer align-vertical">
-  	  	{showEmailForm?<EmailForm onSubmit={this.onEmailLoginClick} onClose={()=>{this.setState({showEmailForm:false})}}/>:null}
+  	  	{showEmailForm?<EmailForm onSubmit={this.onEmailLoginClick.bind(this)} onClose={()=>{this.setState({showEmailForm:false})}}/>:null}
   	  	<div className="titleContainer align-vertical">
 	  		<p>Bienvenido a</p>
 	  		<p><span>CRISTAL</span></p>

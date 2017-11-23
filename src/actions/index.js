@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import {devUser,dummyNews,dummyRepresentantes} from "./fakeData";
 import {
 	AUTH_USER,
@@ -8,7 +8,8 @@ import {
 	FETCH_REPS
 } from './types';
 
-// const ROOT_URL = 'http://localhost:3090';
+axios.defaults.withCredentials = true;
+const ROOT_URL = 'http://10.49.69.224:3000';
 
 export function fetchRepresentantes(){
 	return {
@@ -18,28 +19,57 @@ export function fetchRepresentantes(){
 }
 
 export function fetchNews(){
-	
 	return {
 		type:FETCH_NEWS,
 		payload:dummyNews
 	};
-	// const r = axios.get(ROOT_URL,{ headers: { authorization: localStorage.getItem('token') } });
-	// return {
-	// 	type:FETCH_MESSAGES, 
-	// 	payload: r
-    //};
+}
+
+function getUserFromResponse({data:{data}}){
+	const u = data[0];
+	const temp = {
+		_id: u.id,
+		email: u.email,
+		src: u.src,
+		name:u.name,
+		intereses:[],
+		posturas:[
+			{k:"Aborto",v:u.postAborto},
+			{k:"Matrimonio Igualitario",v:u.postMatrimonio},
+			{k:"Adopcion LGBT",v:u.postLGBT},
+			{k:"TresDeTres",v:u.post3de3},
+			{k:"Seguridad Publica",v:u.postSegPub},
+		],
+		CP:u.CP,
+	};
+	if (u.Educacion) temp.intereses.push({k:0,v:"Educacion"});
+	if (u.LGBT) temp.intereses.push({k:5,v:"LGBT"});
+	if (u.Legislaciones) temp.intereses.push({k:2,v:"Legislaciones"});
+	if (u.Emprendimiento) temp.intereses.push({k:4,v:"Emprendimiento"});
+	if (u.Tecnologia) temp.intereses.push({k:1,v:"Tecnologia"});
+	if (u.Economia) temp.intereses.push({k:3,v:"Economía"});
+	if (u.Seguridad) temp.intereses.push({k:6,v:"Seguridad"});
+	return temp; 
 }
 
 //Debemos pasarle el push de la history...
 //Submit email/password to the server
-export function signinUser({ email, password, push }){
+export function signinUser({ email, pwd, push }){
 	return dispatch =>  {
 		//Obtener el perfil desde el server con la combinacion email/pwd
-		const user = devUser;
-		
-		localStorage.setItem('user', JSON.stringify(user));
-		dispatch({type: AUTH_USER, payload: user });
-		push('/'); 
+		// const user = devUser;
+		// 
+		// dispatch({type: AUTH_USER, payload: user });
+		// push('/'); 
+		axios.post(`${ROOT_URL}/login`,{email,pwd}).then(response=>{
+			const user = getUserFromResponse(response);
+			localStorage.setItem('user', JSON.stringify(user));
+			dispatch({type: AUTH_USER, payload: user });
+			push('/');
+		}).catch(e=>{
+			console.error(e);
+		});
+
 	};
 }
 
