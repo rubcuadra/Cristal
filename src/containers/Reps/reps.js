@@ -68,7 +68,7 @@ const RepsTable = ({reps})=>{
 class Representantes extends Component {
   
   componentDidMount(){
-  	this.props.fetchRepresentantes(); //Pedir los representantes
+  	this.props.fetchRepresentantes({CP:this.props.auth.data.CP}); //Pedir los representantes
   }
 
   render() {
@@ -81,8 +81,8 @@ class Representantes extends Component {
   }
 }
 
-function mapStateToProps({reps}){	
-	return {reps};
+function mapStateToProps({reps,auth}){	
+	return {reps,auth};
 }
 
 export default connect(mapStateToProps,{fetchRepresentantes})(Representantes);

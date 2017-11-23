@@ -11,12 +11,39 @@ import {
 axios.defaults.withCredentials = true;
 const ROOT_URL = 'http://10.49.69.224:3000';
 
-export function fetchRepresentantes(){
-	
+export function fetchRepresentantes({CP}){
 	return d=>{
-		axios.get(`${ROOT_URL}/representants`).then(({data:{data}})=>{
-			console.log(data);
-			d({type:FETCH_REPS,payload:data});
+		axios.get(`${ROOT_URL}/representantes?CP=${CP}`).then(({data:{data}})=>{
+			const t = new Date();
+			const reps = data.map(rep=>{
+				return {
+					_id: `${rep.id}`,
+					email: rep.email,
+					src:rep.src,
+					name:rep.name,
+					votos:{
+						Aborto:rep.postAborto>50,
+						"#3de3":rep.post3de3>50,
+						"MI":rep.postMatrimonio>50,
+						"Energia":rep.postSegPub>50,
+					},
+					asistencia:{
+						[`${t.getDate()}/${t.getMonth()+1}`]:rep.asistenciaLunes,
+						[`${t.getDate()+1}/${t.getMonth()+1}`]:rep.asistenciaMartes,
+						[`${t.getDate()+2}/${t.getMonth()+1}`]:rep.asistenciaMiercoles,
+						[`${t.getDate()+3}/${t.getMonth()+1}`]:rep.asistenciaJueves,		
+					},
+					empatia:{
+						seguridad:0.98,
+						salud:0.90,
+						educacion:0.86,
+						medio_ambiente:0.32
+					},
+					cargo: rep.cargo,
+					partido: rep.partido,
+				}
+			});
+			d({type:FETCH_REPS,payload:reps});
 		}).catch(e=>{
 			d({type:FETCH_REPS,payload:dummyRepresentantes});
 		});
@@ -82,7 +109,7 @@ export function loginFB({accessToken,email,name,picture,userID,push}){
 	return dispatch =>  {
 		//Obtener el usuario usando userID y un codigo secreto
 		const user = {...devUser,src:picture,name};//picture es una url
-	
+		// AVISARLE DEL LOGIN DE FB
 		localStorage.setItem('user', JSON.stringify(user)); //Esto sigue igual
 		dispatch({type: AUTH_USER, payload: user });     //Se queda igual
 		push('/'); 
