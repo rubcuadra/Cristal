@@ -34,7 +34,7 @@ export const dummyNews = [
 	{
 		name:"Posponen votar convocatoria para Fepade",
 		content:`La ex panista lamentó que el Senado no haya sido capaz de dejar en claro que el encargado de despacho de la PGR ni siquiera tiene facultades para destituir al fiscal electoral. Los legisladores de Morena condenaron que el procedimiento no sea abierto ni garantice la participación y el escrutinio ciudadano, ya que la ruta dejará la decisión final en manos de los coordinadores. "Esta convocatoria no garantiza que la ciudadanía participe. ¿Por qué no dejar que participen? ¿Para que se puedan hacer los acuerdos políticos?", cuestionó el vicecoordinador de Morena en el Senado, Miguel Barbosa.`,
-		autor:"Pedro Perez",
+		author:"Pedro Perez",
 		src:"https://img.gruporeforma.com/imagenes/elementorelacionado/7/421/6420738.jpg",
 		tags:[
 			"fepade",
@@ -44,7 +44,7 @@ export const dummyNews = [
 	{
 		name:"Prevén reasignar 70 mil mdp en Presupuesto",
 		content:`El priista aseguró que habrá recursos suficientes para enfrentar la emergencia tras los sismos, pues una parte del Fonden ya se erogó este año. "Hay recursos con cargo a seguros, hay otra fiscal, entre todo, el dinero es suficiente para que nadie que sea elegible se quede fuera", aseguró el legislador. En las reasignaciones se destinarán 8 mil millones de pesos más al campo, 6 mil 500 millones más a carreras alimentadoras, 6 millones de pesos adicionales para educación y mil 200 millones a cultura. Además, para estados y municipios habrá 7 mil millones de pesos extra de participaciones, un 4.3 por ciento más en términos reales. Se repondrá con 300 millones de pesos el Fondo de Prevención del Delito, el cual en los dos últimos años había quedado en ceros. El fondo conocido como de los moches, llamado Fortalece en 2017, que en los últimos años tuvo asignaciones de casi 10 mil millones de pesos, desapareció. Sin embargo, se compensará a los municipios con otros fondos, como el Fronterizo, con 750 millones.`,
-		autor:"Juan Ramos",
+		author:"Juan Ramos",
 		src:"https://img.gruporeforma.com/imagenes/elementorelacionado/7/421/6420401.jpg",
 		tags:[
 			"pri",

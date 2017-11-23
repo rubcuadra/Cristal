@@ -12,17 +12,27 @@ axios.defaults.withCredentials = true;
 const ROOT_URL = 'http://10.49.69.224:3000';
 
 export function fetchRepresentantes(){
-	return {
-		type:FETCH_REPS,
-		payload:dummyRepresentantes
-	};
+	
+	return d=>{
+		axios.get(`${ROOT_URL}/representants`).then(({data:{data}})=>{
+			console.log(data);
+			d({type:FETCH_REPS,payload:data});
+		}).catch(e=>{
+			d({type:FETCH_REPS,payload:dummyRepresentantes});
+		});
+	}
 }
 
 export function fetchNews(){
-	return {
-		type:FETCH_NEWS,
-		payload:dummyNews
-	};
+	return d=>{
+		axios.get(`${ROOT_URL}/news`).then(({data:{data}})=>{
+			// const news = dummyNews;
+			d({type:FETCH_NEWS,payload:data});
+		}).catch(e=>{
+			console.log(e);
+			d({type:FETCH_NEWS,payload:dummyNews});
+		});
+	}
 }
 
 function getUserFromResponse({data:{data}}){
@@ -56,11 +66,6 @@ function getUserFromResponse({data:{data}}){
 //Submit email/password to the server
 export function signinUser({ email, pwd, push }){
 	return dispatch =>  {
-		//Obtener el perfil desde el server con la combinacion email/pwd
-		// const user = devUser;
-		// 
-		// dispatch({type: AUTH_USER, payload: user });
-		// push('/'); 
 		axios.post(`${ROOT_URL}/login`,{email,pwd}).then(response=>{
 			const user = getUserFromResponse(response);
 			localStorage.setItem('user', JSON.stringify(user));
