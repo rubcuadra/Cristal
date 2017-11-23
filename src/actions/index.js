@@ -107,12 +107,20 @@ export function signinUser({ email, pwd, push }){
 
 export function loginFB({accessToken,email,name,picture,userID,push}){
 	return dispatch =>  {
-		//Obtener el usuario usando userID y un codigo secreto
-		const user = {...devUser,src:picture,name};//picture es una url
-		// AVISARLE DEL LOGIN DE FB
-		localStorage.setItem('user', JSON.stringify(user)); //Esto sigue igual
-		dispatch({type: AUTH_USER, payload: user });     //Se queda igual
-		push('/'); 
+		axios.post(`${ROOT_URL}/register`,{email,name,src:picture,pwd:userID}).then(r=>{
+			const user = getUserFromResponse(r);
+			localStorage.setItem('user', JSON.stringify(user));
+			dispatch({type: AUTH_USER, payload: user });
+			push('/');
+		}).catch(e=>{
+			console.log(e);
+			//Obtener el usuario usando userID y un codigo secreto
+			// const user = {...devUser,src:picture,name};//picture es una url
+			// localStorage.setItem('user', JSON.stringify(user)); //Esto sigue igual
+			// dispatch({type: AUTH_USER, payload: user });     //Se queda igual
+			// push('/'); 
+		});
+		
 	};
 }
 

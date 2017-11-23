@@ -47,7 +47,7 @@ class Login extends Component{
 	}
 
 	responseFacebook(response){
-		console.log(response);
+		// console.log(response);
 		const {accessToken,email,name,userID} = response;
 		if (userID) { //Nos pudimos logear
 			const picture = `https://graph.facebook.com/${userID}/picture?type=square&width=300`;
