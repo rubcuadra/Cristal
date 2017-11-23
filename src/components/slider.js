@@ -11,7 +11,8 @@ const marks = {
 export default class CustomSlider extends Component {
   constructor(props) {
     super(props);
-    const {input:{value}} = props;
+    let {input:{value}} = props;
+    if (!value) value = 50;
     const initialState =  value>=50?[50,value]:[value,50];
     
     this.state = {
