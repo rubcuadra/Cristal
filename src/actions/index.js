@@ -139,3 +139,7 @@ export function signoutUser(){
 		payload: {}
 	}
 }
+
+export function updateProfile(data){
+	console.log(data);
+}

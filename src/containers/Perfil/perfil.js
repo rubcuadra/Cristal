@@ -44,9 +44,25 @@ class PostsNew extends Component{
 	}
 
 	onSubmit(values){
-		console.log(values);
-		console.log("SUBMIT");
-		// this.props.createPost(values, ()=>this.props.history.push('/') );
+		const {auth} = this.props;
+		this.props.updateProfile({
+			"email": auth.data.email,
+            "src": auth.data.src,
+            "name": values.uName,
+            "CP": auth.data.CP,
+            "postAborto": values["slide_Aborto"],
+            "postLGBT": values["slide_Adopcion LGBT"],
+            "post3de3": values["slide_TresDeTres"],
+            "postMatrimonio": values["slide_Matrimonio Igualitario"],
+            "postSegPub": values["slide_Seguridad Publica"],
+            "Educacion": values.cat_0?1:0,
+            "LGBT": values.cat_5?1:0,
+            "Legislaciones": values.cat_2?1:0,
+            "Economia": values.cat_3?1:0,
+            "Emprendimiento": values.cat_4?1:0,
+            "Tecnologia": values.cat_1?1:0,
+            "Seguridad": values.cat_6?1:0
+		});
 	}
 
 	renderSliders(posturas){
@@ -64,7 +80,7 @@ class PostsNew extends Component{
 		return (
 			<div className="profileContainer max">
 			  <NavBar/>
-			  <form className="align max" onSubmit={handleSubmit(this.onSubmit)}>
+			  <form className="align max" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				<div className="personal align-vertical">
 					<div className="userInfo max align-vertical">
 					  <div style={{background}} className="pp-name"/>
@@ -116,7 +132,6 @@ class PostsNew extends Component{
 //Necesaria, se le debe pasar al reduxForm y siempre tendra un object values
 function validate(values){
 	const errors = {};
-	// console.log(values);
 	//Validate
 	if (!values.uName) { errors.uName = "Escribir un nombre!"; }
 	//If errors == {}, OK, se hace el submit
