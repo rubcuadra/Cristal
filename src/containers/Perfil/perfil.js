@@ -45,7 +45,7 @@ class PostsNew extends Component{
 
 	onSubmit(values){
 		const {auth} = this.props;
-		this.props.updateProfile({
+		const data = {
 			"email": auth.data.email,
             "src": auth.data.src,
             "name": values.uName,
@@ -62,7 +62,9 @@ class PostsNew extends Component{
             "Emprendimiento": values.cat_4?1:0,
             "Tecnologia": values.cat_1?1:0,
             "Seguridad": values.cat_6?1:0
-		});
+		};
+		console.log(data);
+		this.props.updateProfile(data);
 	}
 
 	renderSliders(posturas){

@@ -141,5 +141,11 @@ export function signoutUser(){
 }
 
 export function updateProfile(data){
-	console.log(data);
+	return d=>{
+		axios.post(`${ROOT_URL}/postperfil`,{...data}).then(r=>{
+			console.log(r);
+		}).catch(e=>{
+			console.log(e);
+		});
+	}; 
 }
