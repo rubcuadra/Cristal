@@ -9,7 +9,7 @@ import {
 } from './types';
 
 axios.defaults.withCredentials = true;
-const ROOT_URL = 'http://10.49.69.224:3000';
+const ROOT_URL = 'http://localhost:3000';
 
 export function fetchRepresentantes({CP}){
 	return d=>{
@@ -94,6 +94,7 @@ function getUserFromResponse({data:{data}}){
 export function signinUser({ email, pwd, push }){
 	return dispatch =>  {
 		axios.post(`${ROOT_URL}/login`,{email,pwd}).then(response=>{
+			console.log(response);
 			const user = getUserFromResponse(response);
 			localStorage.setItem('user', JSON.stringify(user));
 			dispatch({type: AUTH_USER, payload: user });
